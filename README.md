@@ -1,9 +1,11 @@
 # X
 
-Monorepo for website basics published as individual packages.
+Monorepo for website basics, published as individual packages.
 
-## Packages
+## Elements
 
-- [**style**](style): Minimal utility styles.
 - [**gallery element**](gallery-element): Image and video gallery.
-- [**up**](up): Upgrade links and forms to fetch with in-place swap.
+
+## Scripts
+
+- [**up**](up): Upgrade links and forms to background fetch with in-place swap.
