@@ -1,4 +1,4 @@
-# X
+# X Web
 
 Monorepo for website basics, published as individual packages.
 
