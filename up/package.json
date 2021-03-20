@@ -1,0 +1,8 @@
+{
+  "name": "@fabpopa/x-up",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "fabpopa/x-web",
+  "type": "module",
+  "scripts": {}
+}
