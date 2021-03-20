@@ -4,7 +4,7 @@ Monorepo for website basics, published as individual packages.
 
 ## Elements
 
-- [**gallery element**](gallery-element): Image and video gallery.
+- [**gallery**](gallery): Gallery for images and other media.
 
 ## Scripts
 
