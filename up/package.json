@@ -4,5 +4,23 @@
   "license": "MIT",
   "repository": "fabpopa/x-web",
   "type": "module",
-  "scripts": {}
+  "browser": "index.js",
+  "files": [
+    "index.min.js"
+  ],
+  "scripts": {
+    "serve": "serve",
+    "format": "prettier --ignore-unknown --write '**/*'",
+    "format:check": "prettier --ignore-unknown --check '**/*'",
+    "lint": "npm run format:check",
+    "build": "terser --module --compress --mangle -o index.min.js index.js",
+    "publish": ""
+  },
+  "dependencies": {
+    "prettier": "^2.2.1"
+  },
+  "devDependencies": {
+    "serve": "^11.3.2",
+    "terser": "^5.6.1"
+  }
 }
