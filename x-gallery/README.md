@@ -1,4 +1,4 @@
-# Gallery
+# x-gallery
 
 Custom element to construct a gallery of images and other media.
 
