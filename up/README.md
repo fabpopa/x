@@ -45,6 +45,12 @@ Similarly, `data-up-post` on an element inside a `<form>` performs a `POST` to t
 - `data-up-inner` Change swap method to `innerHTML`.
 - `data-up-history` Update URL in browser bar.
 
-## Browser compatibility
+## Notes
+
+### Cross-origin requests
+
+Background fetches comply with CORS policy and are mostly meant for pages on the same origin.
+
+### Browser compatibility
 
 All modern browsers that can support `<script type=module>`.
