@@ -2,7 +2,7 @@
 
 Perform actions without full page refresh.
 
-It works by upgrading links and forms to background fetch, with the option to swap out elements from the response into the current page.
+Upgrades links and forms to background fetch, with an option to swap elements from the response into the current page.
 
 ## Install
 
@@ -12,7 +12,7 @@ npm i @fabpopa/x-up
 
 Watch a subtree from the root element for changes and upgrade elements automatically:
 
-```
+```js
 import { watch, unwatch } from "@fabpopa/x-up";
 const root = document.body;
 watch(root); // Start watching subtree from root
@@ -21,7 +21,7 @@ unwatch(root); // Stop watching
 
 Or upgrade a subtree manually without watching for changes:
 
-```
+```js
 import { upgrade, downgrade } from "@fabpopa/x-up";
 const root = document.querySelector("#target");
 upgrade(root); // Add functionality to elements from root
@@ -44,3 +44,7 @@ Similarly, `data-up-post` on an element inside a `<form>` performs a `POST` to t
 - `data-up-select=[selector]` Select different target from response. Empty swaps entire response.
 - `data-up-inner` Change swap method to `innerHTML`.
 - `data-up-history` Update URL in browser bar.
+
+## Browser compatibility
+
+All modern browsers that can support `<script type=module>`.
