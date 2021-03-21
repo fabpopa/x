@@ -1,0 +1,38 @@
+<meta charset="utf8" />
+<style>
+  body {
+    font-family: monospace;
+    font-size: large;
+  }
+</style>
+
+<p>We're fetching results from this same page to stay within the same origin.</p>
+<p>Refresh to reset the examples.</p>
+
+<h2>Examples</h2>
+
+<p>
+  <a href="examples.html#example-count"
+    data-up-target=".example-count-target"
+    data-up-select="#example-count">Get example count</a>
+  →
+  <span class="example-count-target">Target</span>
+</p>
+
+<p>
+  <a href="examples.html#example-count"
+    data-up-target=".example-count-inner-target"
+    data-up-select="#example-count"
+    data-up-inner>Get example count inner</a>
+  →
+  <span class="example-count-inner-target">Target</span>
+</p>
+
+<script type="module">
+  import { init } from "./index.js";
+  init();
+</script>
+
+<h2>Data to link to and fetch</h2>
+
+<div>Example count: <span id="example-count" style="background-color: deepskyblue;">1234</span></div>
