@@ -1,6 +1,6 @@
 {
   "name": "@fabpopa/x-up",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "license": "MIT",
   "repository": "fabpopa/x-web",
   "type": "module",
@@ -9,18 +9,15 @@
     "index.min.js"
   ],
   "scripts": {
-    "serve": "serve",
+    "serve": "npm exec serve",
     "format": "prettier --ignore-unknown --write '**/*'",
     "format:check": "prettier --ignore-unknown --check '**/*'",
     "lint": "npm run format:check",
     "build": "terser --module --compress --mangle -o index.min.js index.js",
     "prepack": "npm run build"
   },
-  "dependencies": {
-    "prettier": "^2.2.1"
-  },
   "devDependencies": {
-    "serve": "^11.3.2",
+    "prettier": "^2.2.1",
     "terser": "^5.6.1"
   }
 }
