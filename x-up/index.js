@@ -1,4 +1,4 @@
-const mark = `up${window.btoa(Math.random() * Math.pow(10, 4)).slice(0, 4)}`;
+const mark = `xUp${window.btoa(Math.random() * Math.pow(10, 4)).slice(0, 4)}`;
 const instructions = ["get", "post", "target", "select", "inner", "history"];
 const iAttrSelector = instructions.map((i) => `[data-up-${i}]`).join(",");
 
