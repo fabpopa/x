@@ -8,9 +8,9 @@ Website basics, published as individual packages.
 
 ### Technical choices
 
-- Follow [custom element best practices](https://developers.google.com/web/fundamentals/web-components/best-practices)
-- Do not use shadow DOM, so that it's possible to style and traverse from the outside
-- Apply normalization rules selectively to inside elements (e.g. from [modern-normalize](https://github.com/sindresorhus/modern-normalize))
+- Follow the [Web Fundamentals Custom Element Best Practices](https://developers.google.com/web/fundamentals/web-components/best-practices)
+- Avoid shadow DOM to allow styling and traversing from the outside
+- Apply normalization rules selectively to inside elements (e.g. rules from [modern-normalize](https://github.com/sindresorhus/modern-normalize))
 
 ## Scripts
 
