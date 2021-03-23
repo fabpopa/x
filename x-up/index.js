@@ -2,8 +2,11 @@ const handlerKey = "xUpHandler";
 const instructions = ["get", "post", "target", "select", "inner", "history"];
 const iAttrSelector = instructions.map((i) => `[data-up-${i}]`).join(",");
 
+const rootElToObserverMap = new Map();
+const rootElToParentObserverMap = new Map();
+
 const error = (msg) => {
-  throw new Error(`X lib: ${msg}`);
+  throw new Error(`x-up: ${msg}`);
 };
 
 const makeSwapAttr = (inner) => (inner ? "innerHTML" : "outerHTML");
@@ -35,6 +38,7 @@ const makeFetchHandler = ({
   if (!selectEl) error(`No response element for ${select}`);
   const swapAttr = makeSwapAttr(inner);
   const targetEl = document.querySelector(target);
+  if (!targetEl) error(`No target element for ${target}`);
   targetEl[swapAttr] = selectEl[swapAttr];
 
   if (history) window.history.replaceState({}, dom.title, url);
@@ -92,4 +96,44 @@ export const upgrade = (rootEl) => {
 export const downgrade = (rootEl) => {
   const els = Array.from(rootEl.querySelectorAll(iAttrSelector));
   els.forEach((el) => downgradeElement(el));
+};
+
+const handleMutation = (mutations) => {
+  mutations.forEach(({ type, target }) => {
+    if (type !== "childList") return;
+    upgrade(target);
+  });
+};
+
+const handleMaybeRootElDeletion = (mutations) => {
+  mutations.forEach((m) => {
+    if (m.removedNodes.length === 0) return;
+    const removedNodes = Array.from(m.removedNodes);
+    const delRootEls = removedNodes.filter((n) => rootElToObserverMap.has(n));
+    delRootEls.forEach(unwatch);
+  });
+};
+
+export const watch = (rootEl) => {
+  if (rootElToObserverMap.has(rootEl)) return;
+  const observer = new MutationObserver(handleMutation);
+  rootElToObserverMap.set(rootEl, observer);
+  observer.observe(rootEl, { subtree: true, childList: true });
+  upgrade(rootEl);
+
+  // Clean up references should any rootEl be removed
+  const parentObserver = new MutationObserver(handleMaybeRootElDeletion);
+  rootElToParentObserverMap.set(rootEl, parentObserver);
+  parentObserver.observe(rootEl.parentNode, { childList: true });
+};
+
+export const unwatch = (rootEl) => {
+  if (!rootElToObserverMap.has(rootEl)) return;
+  const observer = rootElToObserverMap.get(rootEl);
+  rootElToObserverMap.delete(rootEl);
+  observer.disconnect();
+  const parentObserver = rootElToParentObserverMap.get(rootEl);
+  rootElToParentObserverMap.delete(rootEl);
+  parentObserver.disconnect();
+  downgrade(rootEl);
 };
