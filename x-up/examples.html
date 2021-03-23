@@ -1,9 +1,7 @@
 <meta charset="utf8" />
 <style>
-  body {
-    font-family: monospace;
-    font-size: large;
-  }
+  body { font-family: monospace; font-size: large; }
+  a { color: blue; }
 </style>
 
 <p>We're fetching results from this same page to stay within the same origin.</p>
@@ -29,8 +27,8 @@
 </p>
 
 <script type="module">
-  import { init } from "./index.js";
-  init();
+  import { watch } from "./index.js";
+  watch(document.body);
 </script>
 
 <h2>Data to link to and fetch</h2>
