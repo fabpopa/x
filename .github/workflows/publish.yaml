@@ -12,8 +12,11 @@ jobs:
     steps:
       - id: info
         run: |
+          echo "::group::Detect package" &&
           package="$(echo '${{github.ref}}' | sed 's/refs\/tags\///' | sed 's/@.*//')" &&
-          echo "::set-output name=package::$package"
+          echo "::set-output name=package::$package" &&
+          echo "Detected package $package" &&
+          echo "::endgroup::"
   publish:
     name: Prepare code and publish
     runs-on: ubuntu-latest
