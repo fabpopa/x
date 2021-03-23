@@ -2,7 +2,7 @@
 
 Perform actions without full page refresh.
 
-Upgrades links and forms to background fetch, with an option to swap elements from the response into the current page.
+Links and forms can upgrade to background fetch, with an option to swap elements from the response into the current page.
 
 ## Install
 
@@ -15,7 +15,7 @@ Watch a subtree from the root element for changes and upgrade elements automatic
 ```js
 import { watch, unwatch } from "@fabpopa/x-up";
 const root = document.body;
-watch(root); // Start watching subtree from root
+watch(root); // Start watching subtree under root
 unwatch(root); // Stop watching
 ```
 
@@ -24,7 +24,7 @@ Or upgrade a subtree manually without watching for changes:
 ```js
 import { upgrade, downgrade } from "@fabpopa/x-up";
 const root = document.querySelector("#target");
-upgrade(root); // Add functionality to elements from root
+upgrade(root); // Add functionality to elements under root
 downgrade(root); // Remove functionality
 ```
 
@@ -49,8 +49,8 @@ Similarly, `data-up-post` on an element inside a `<form>` performs a `POST` to t
 
 ### Cross-origin requests
 
-Background fetches comply with CORS policy and are mostly meant for pages on the same origin.
+Background fetches comply with CORS policy and are mostly meant for pages from the same origin.
 
 ### Browser compatibility
 
-All modern browsers that can support `<script type=module>`.
+All modern browsers that support `<script type=module>`.
