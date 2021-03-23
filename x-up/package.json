@@ -13,8 +13,7 @@
     "format": "prettier --ignore-unknown --write '**/*'",
     "format:check": "prettier --ignore-unknown --check '**/*'",
     "lint": "npm run format:check",
-    "build": "terser --module --compress --mangle -o index.min.js index.js",
-    "prepack": "npm run build"
+    "build": "terser --module --compress --mangle -o index.min.js index.js"
   },
   "devDependencies": {
     "prettier": "^2.2.1",
