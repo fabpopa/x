@@ -1,8 +1,6 @@
-const mark = `xUp${window.btoa(Math.random() * Math.pow(10, 4)).slice(0, 4)}`;
+const handlerKey = "xUpHandler";
 const instructions = ["get", "post", "target", "select", "inner", "history"];
 const iAttrSelector = instructions.map((i) => `[data-up-${i}]`).join(",");
-
-let observer; // Mutation observer to detect and upgrade new elements
 
 const error = (msg) => {
   throw new Error(`X lib: ${msg}`);
@@ -63,13 +61,20 @@ const makePostHandler = (el, { post, target, select, inner, history }) => {
 };
 
 const upgradeElement = (el, opt) => {
-  if (el[mark]) return;
-  el[mark] = true; // Mark upgraded elements to only process once
+  if (el[handlerKey]) return;
   let handler;
   if (opt.get || opt.target) handler = makeGetHandler(el, opt);
   if (opt.post) handler = makePostHandler(el, opt);
   if (!handler) error("Invalid element");
   el.addEventListener("click", handler);
+  el[handlerKey] = handler;
+};
+
+const downgradeElement = (el) => {
+  const handler = el[handlerKey];
+  if (!handler) return;
+  el.removeEventListener("click", handler);
+  delete el[handlerKey];
 };
 
 const readOpts = (el) => {
@@ -79,21 +84,12 @@ const readOpts = (el) => {
   return Object.fromEntries(mapTrueVals);
 };
 
-export const upgradeElements = (rootEl) => {
+export const upgrade = (rootEl) => {
   const els = Array.from(rootEl.querySelectorAll(iAttrSelector));
   els.forEach((el) => upgradeElement(el, readOpts(el)));
 };
 
-const handleMutation = (mutations) => {
-  mutations.forEach(({ type, target }) => {
-    if (type !== "childList") return;
-    upgradeElements(target);
-  });
-};
-
-export const init = () => {
-  if (observer) return;
-  observer = new MutationObserver(handleMutation);
-  observer.observe(document.body, { subtree: true, childList: true });
-  upgradeElements(document.body);
+export const downgrade = (rootEl) => {
+  const els = Array.from(rootEl.querySelectorAll(iAttrSelector));
+  els.forEach((el) => downgradeElement(el));
 };
